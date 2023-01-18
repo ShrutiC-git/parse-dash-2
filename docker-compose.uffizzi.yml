@@ -5,7 +5,10 @@ x-uffizzi:
   ingress:
     service: nginx
     port: 8081
-
+  continuous_previews:
+    deploy_preview_when_pull_request_is_opened: true
+    delete_preview_when_pull_request_is_closed: true
+    share_to_github: true
 services:
 
   postgres:
@@ -38,7 +41,9 @@ services:
             limits:
               memory: 1000M
   dashboard:
-        image: "${PARSE_DASHBOARD_IMAGE}"
+        build:
+          context: .
+          dockerfile: ./Dockerfile
         ports:
             - "4040:4040"
         environment:

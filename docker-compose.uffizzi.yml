@@ -3,8 +3,8 @@ version: '3'
 # uffizzi integration
 x-uffizzi:
   ingress:
-    service: nginx
-    port: 8081
+    service: dashboard
+    port: 4040
   continuous_previews:
     deploy_preview_when_pull_request_is_opened: true
     delete_preview_when_pull_request_is_closed: true
@@ -40,6 +40,7 @@ services:
           resources:
             limits:
               memory: 1000M
+
   dashboard:
         build:
           context: .
@@ -58,17 +59,17 @@ services:
         command:
          - "-c"
          - "PARSE_DASHBOARD_SERVER_URL=$$UFFIZZI_URL/parse node Parse-Dashboard/index.js"
-        #- PARSE_DASHBOARD_COOKIE_SESSION_SECRET=AB8849B6-D725-4A75-AA73-AB7103F0363F
+
         deploy:
           resources:
             limits:
               memory: 1000M
 
-  nginx:
-    image: nginx:alpine
-    volumes:
-      - ./nginx-uffizzi:/etc/nginx
-      - ./nginx-uffizzi/html:/usr/share/nginx/html
+  # nginx:
+  #   image: nginx:alpine
+  #   volumes:
+  #     - ./nginx-uffizzi:/etc/nginx
+  #     - ./nginx-uffizzi/html:/usr/share/nginx/html
 
 volumes:
   postgres_data:

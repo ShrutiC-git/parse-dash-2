@@ -184,7 +184,7 @@ Managing multiple apps from the same dashboard is also possible. Simply add addi
 }
 ```
 
-## GraphQL Playground
+## GraphQL Playground - TEST PR
 
 Parse Dashboard has a built-in GraphQL Playground to play with the auto-generated [Parse GraphQL API](https://github.com/parse-community/parse-server#graphql).
 
